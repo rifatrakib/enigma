@@ -1,14 +1,13 @@
 from pymongo import MongoClient
 from nltk.corpus import words
 from math import log
-from pprint import pprint
 
 
 class DataWrangler:
     def __init__(self):
         self.conn = MongoClient('localhost', 27017)
         database = self.conn['enigma']
-        self.enigma = database['crawled_pages']
+        self.enigma = database['pages']
 
     def dictionary_reshape(self):
         document_frequency = {}
@@ -25,14 +24,12 @@ class DataWrangler:
             count += 1
             print(count)
             document_frequency = self.data_merger(document_frequency, doc['word_dictionary'])
-        return document_frequency
+        return count, document_frequency
 
-    def data_merger(self, x, y):
-        keys = list(y.keys())
-        for key in keys:
-            # if key in word_list:
-            x[key] = x.get(key, 0) + 1
-        return x
+    def data_merger(self, word_counts, document):
+        for item in document:
+            word_counts[item['word']] = word_counts.get(item['word'], 0) + 1
+        return word_counts
 
     def calculate_idf(self, word_dictionary, total_document):
         idf_values = {}
@@ -49,10 +46,23 @@ class DataWrangler:
         return cleaned_data
 
     def update_idf(self, word_dict):
-        for key, value in word_dict.items():
-            field = "word_dictionary." + key
-            print('Updating idf of', key, '...')
-            self.enigma.update_many({field: {"$exists": "true"}}, {"$set": {field+'.idf': value}})
+        for doc in self.enigma.find():
+            doc_id = doc['_id']
+            for item in doc['word_dictionary']:
+                key = item['word']
+                if key not in word_dict.keys():
+                    continue
+                tf = item['tf']
+                print('updating idf of', key, 'for document of', doc['url'])
+                self.enigma.update_one(
+                    {"_id": doc_id, "word_dictionary.word": key},
+                    {
+                        "$set": {
+                            "word_dictionary.$.idf": word_dict[key],
+                            "word_dictionary.$.tfidf": word_dict[key] * tf
+                        }
+                    }
+                )
 
     def pagerank_import(self):
         pipeline = [

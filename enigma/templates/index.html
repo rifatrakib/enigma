@@ -1,69 +1,72 @@
 {% extends "base.html" %}
-
 {% block content %}
-    <!--<div class="d-flex h-100 text-center text-black">
-        <div class="cover-container d-flex w-100 h-100 mx-auto flex-column">
-            <header class="mb-auto h-50">
-                <nav class="navbar navbar-expand-lg navbar-light">
-                    <div class="container-fluid">
-                        <a class="navbar-brand" href="#">Enigma</a>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+    <div class="cover-container d-flex w-100 h-100 text-center text-black mx-auto flex-column">
+        <header class="mb-auto h-50">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">Enigma</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false"
                         aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarText">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarText">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Cloud Services</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Documentation</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Donate</a>
+                            </li>
+                        </ul>
+                        <span class="navbar-text">
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Cloud Services</a>
+                                    <a class="nav-link" href="#">User</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Documentation</a>
+                                    <a class="nav-link" href="#">Apps</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Donate</a>
+                                    <a class="nav-link" href="#">Login/Logout</a>
                                 </li>
                             </ul>
-                            <span class="navbar-text">
-                                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">User</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Apps</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Login/Logout</a>
-                                    </li>
-                                </ul>
-                            </span>
+                        </span>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <main class="container h-100 px-3 mb-auto">
+            <div class="row">
+                <div class="col-12">
+                    <img src="static/images/logo.png" alt="logo" height="100px" width="300px" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6 offset-3">
+                    <form method="POST" action="/search">
+                        <div class="mb-4 mt-4">
+                            <input class="form-control" type="search" name="query" required />
                         </div>
-                    </div>
-                </nav>
-            </header>-->
-            <div class="h-25"></div>
-            <main class="container h-100 px-3 mb-auto">
-                <div class="row">
-                    <div class="col-12">
-                        <img src="static/images/logo.png" alt="logo" height="100px" width="300px" />
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6 offset-3">
-                        <form>
-                            <div class="mb-4 mt-4">
-                                <input class="form-control" name="query" required />
+                        <div class="mb-5">
+                            <div class="btn-toolbar justify-content-center" role="toolbar">
+                                <div class="btn-group m-2" role="group">
+                                    <button type="button" class="btn btn-secondary">Submit Search</button>
+                                </div>
+                                <div class="btn-group m-2" role="group">
+                                    <button type="button" class="btn btn-secondary">I'm feeling lucky</button>
+                                </div>
                             </div>
-                            <div class="mb-5">
-                                <button class="btn btn-primary" type="submit" disabled>Submit form</button>
-                            </div>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                 </div>
-            </main>
-            <!--<footer class="mt-auto">
-                <p>Some important information and links at the footer</p>
-            </footer>
-        </div>
-    </div>-->
+            </div>
+        </main>
+        <footer class="mt-auto">
+            <p>Some important information and links at the footer</p>
+        </footer>
+    </div>
 {% endblock %}

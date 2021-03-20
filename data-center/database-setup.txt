@@ -1,0 +1,6 @@
+data-center-|
+			|-database-|
+					   |-data
+					   |-log
+enigma
+enigma-scaler

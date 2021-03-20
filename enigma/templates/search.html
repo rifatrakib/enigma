@@ -1,7 +1,57 @@
 {% extends "base.html" %}
-
 {% block content %}
-            <main class="container h-100 px-3 mb-auto">
-                <p>Search content displays here</p>
-            </main>
+    <div>
+        <header class="container-fluid mt-4">
+            <div class="row d-flex flex-wrap align-items-center">
+                <div class="col-md-1">
+                    <a class="navbar-brand offset-md-2" href="/">
+                        <img class="align-center" src="../static/images/logo.png" width="100" />
+                    </a>
+                </div>
+                <div class="col-md-5">
+                    <form class="form-horizontal" method="POST" action="/search">
+                        <div class="row">
+                            <div class="col-11">
+                                <input class="form-control" type="search" name="query" value="{{ query }}" />
+                            </div>
+                            <div class="col-1 invisible">
+                                <button class="btn btn-primary" type="submit" disabled>Go</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex justify-content-end">
+                        <a class="p-2 text-dark nav-link" href="#">Settings</a>
+                        <a class="p-2 text-dark nav-link" href="#">User</a>
+                        <a class="p-2 nav-link invisible" href="#">log</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row d-flex flex-wrap align-items-center">
+                <div class="col-md-5 offset-md-1 mt-2">
+                    <p class="m-3">Menu items</p>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="container-fluid">
+                <div class="col-md-5 offset-md-1">
+                {% for result in results %}
+                    <div class="result-item mb-4">
+                        <h2>{{ result.title }}</h2>
+                        <p class="mb-1">
+                            <a href="{{ result.url }}">{{ result.url }}</a>
+                        </p>
+                        <p>{{ result.content }}</p>
+                    </div>
+                {% endfor %}
+                </div>
+                <div class="col-md-6"></div>
+            </div>
+        </main>
+        <footer>
+
+        </footer>
+    </div>
 {% endblock %}
